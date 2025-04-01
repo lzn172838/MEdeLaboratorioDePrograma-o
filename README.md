@@ -1,1 +1,1 @@
-Este é um repositório destinado ao armazenamento do nosso trabalho referente a uma medida de eficiência de laboratório de programação. O projeto a ser desenvolvido consiste em uma biblioteca implementada com operações CRUD utilizando arrays, na linguagem Java. TESTE
+Este é um repositório destinado ao armazenamento do nosso trabalho referente a uma medida de eficiência de laboratório de programação. O projeto a ser desenvolvido consiste em uma biblioteca implementada com operações CRUD utilizando arrays, na linguagem Java.

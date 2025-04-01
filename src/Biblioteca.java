@@ -50,6 +50,7 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
                 atualizar();
             }
         }
+        entrada.close();
     }
 
     public static void Voltar () { // Essa classe serve para dar continuidade ao programa, fazendo com que em uma só execução seja possível realizar todas as funcionalidades.
@@ -63,6 +64,7 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
         if(resposta.equals("Não") || resposta.equals("não") || resposta.equals("Nao") || resposta.equals("nao")){
             System.exit(0);
         }
+        entrada.close();
     }
 
     public static void listar(){ // A classe listar imprime todos os livros encontrados dentro da lista.
@@ -74,6 +76,7 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
                 System.out.println("- " + livro);
             }
         }
+        
         Voltar();
     }
 
@@ -83,6 +86,7 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
         String livro = entrada.nextLine();
         biblioteca.add(livro);
         System.out.println("O livro foi adicionado.\n");
+        entrada.close();
         Voltar();
     }
 
@@ -96,6 +100,7 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
         }else{
             System.out.println(livro+" não faz parte da biblioteca.");
         }
+        entrada.close();
         Voltar();
     }
 
@@ -112,6 +117,7 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
         } else {
             System.out.println("O livro não está na biblioteca.");
         }
+        entrada.close();
         Voltar();
     }
 
@@ -124,9 +130,11 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
             System.out.print("O livro foi removido.");
         }else{
             System.out.println("O livro não está na biblioteca.");
-        }
+        } 
+        entrada.close();
         Voltar();
     }
+    
 
     public static void main(String[] args) { // Tal classe dará início a execução do programa, chamando as classes anteriores e colocando-as em prática.
         Menu();
