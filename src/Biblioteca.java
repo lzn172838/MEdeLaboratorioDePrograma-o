@@ -9,7 +9,7 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
         Scanner entrada = new Scanner(System.in);
 
         //Menu com o CRUD, "sair" e "seguir".
-        System.out.println("Biblioteca em Java:"); // Título no topo para melhor organização.
+        System.out.println("\nBiblioteca em Java:"); // Título no topo para melhor organização.
         System.out.println("Listar todos (1)"); // Read.
         System.out.println("Adicionar Livro (2)"); //Create.
         System.out.println("Buscar Livro (3)"); // Search.
@@ -18,9 +18,9 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
         System.out.println("Sair (6)"); // Sair.
 
         if (!entrada.hasNextInt()) { // O parâmetro encontrado nesse if tem como finalidade verificar se a entrada é número antes de seguir.
-            System.out.println("Essa alternativa não existe. Digite uma opção válida.");
+            System.out.println("\nEssa alternativa não existe. Digite uma opção válida.");
             entrada.nextLine();
-            Voltar();
+            Menu();
 
         } else {
             int a = entrada.nextInt();
