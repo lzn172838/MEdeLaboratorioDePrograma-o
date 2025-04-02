@@ -18,12 +18,16 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
         System.out.println("Sair (6)"); // Sair.
 
         if (!entrada.hasNextInt()) { // O parâmetro encontrado nesse if tem como finalidade verificar se a entrada é número antes de seguir.
-            System.out.println("Essa alternativa não existe.");
+            System.out.println("Essa alternativa não existe. Digite uma opção válida.");
+            entrada.nextLine();
+            Voltar();
+
         } else {
             int a = entrada.nextInt();
 
             if (a < 1 || a > 6) { // Caso o usuário digite um núemro menor do que 1 (negativo) ou maior do que 6, o código imprima uma mensagem.
                 System.out.println("Essa alternativa não existe.");
+                
             }
 
             if(a == 6) { // A partir da execução dessa estrutura, no momento em que o usuário digitar "6", o programa irá parar.
@@ -54,17 +58,21 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
     }
 
     public static void Voltar () { // Essa classe serve para dar continuidade ao programa, fazendo com que em uma só execução seja possível realizar todas as funcionalidades.
+       while(true){
         Scanner entrada = new Scanner (System.in);
         System.out.println("\nDeseja voltar para o Menu e acessar outra funcionalidade? Sim/Não");
         String resposta = entrada.nextLine();
 
         if(resposta.equals("Sim") || resposta.equals("sim")){ // equals.(parâmetro) significa basicamente o '==', porém como se trata de igualdade em strings se utiliza esse termo.
             Menu();
+            break;
         }
         if(resposta.equals("Não") || resposta.equals("não") || resposta.equals("Nao") || resposta.equals("nao")){
             System.exit(0);
         }
-        entrada.close();
+        
+    }
+        
     }
 
     public static void listar(){ // A classe listar imprime todos os livros encontrados dentro da lista.
@@ -76,7 +84,6 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
                 System.out.println("- " + livro);
             }
         }
-        
         Voltar();
     }
 
@@ -86,7 +93,6 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
         String livro = entrada.nextLine();
         biblioteca.add(livro);
         System.out.println("O livro foi adicionado.\n");
-        entrada.close();
         Voltar();
     }
 
@@ -100,7 +106,6 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
         }else{
             System.out.println(livro+" não faz parte da biblioteca.");
         }
-        entrada.close();
         Voltar();
     }
 
@@ -117,7 +122,6 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
         } else {
             System.out.println("O livro não está na biblioteca.");
         }
-        entrada.close();
         Voltar();
     }
 
@@ -131,7 +135,6 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
         }else{
             System.out.println("O livro não está na biblioteca.");
         } 
-        entrada.close();
         Voltar();
     }
     
