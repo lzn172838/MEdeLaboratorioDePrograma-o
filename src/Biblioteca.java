@@ -1,145 +1,132 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
-
-public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai dar início ao nosso programa.
-    private static final ArrayList<String> biblioteca = new ArrayList<>(); // Essa linha se refere ao Array(Lista), criado para organizar os livros.
-
-    public static void Menu() {
+public class Biblioteca {
+    public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
+        String[] biblioteca = new String[100];
+        int quantidadeLivros = 0;
 
-        //Menu com o CRUD, "sair" e "seguir".
-        System.out.println("\nBiblioteca em Java:"); // Título no topo para melhor organização.
-        System.out.println("Listar todos (1)"); // Read.
-        System.out.println("Adicionar Livro (2)"); //Create.
-        System.out.println("Buscar Livro (3)"); // Search.
-        System.out.println("Remover Livro (4)"); // Delete.
-        System.out.println("Atualizar(5)"); // Update.
-        System.out.println("Sair (6)"); // Sair.
+        while (true) {
+            System.out.println("\nBiblioteca em Java:");
+            System.out.println("Listar todos (1)");
+            System.out.println("Adicionar Livro (2)");
+            System.out.println("Buscar Livro (3)");
+            System.out.println("Remover Livro (4)");
+            System.out.println("Atualizar (5)");
+            System.out.println("Sair (6)");
 
-        if (!entrada.hasNextInt()) { // O parâmetro encontrado nesse if tem como finalidade verificar se a entrada é número antes de seguir.
-            System.out.println("\nEssa alternativa não existe. Digite uma opção válida.");
-            entrada.nextLine();
-            Menu();
-
-        } else {
-            int a = entrada.nextInt();
-
-            if (a < 1 || a > 6) { // Caso o usuário digite um núemro menor do que 1 (negativo) ou maior do que 6, o código imprima uma mensagem.
-                System.out.println("Essa alternativa não existe.");
-                Menu();
+            if (!entrada.hasNextInt()) {
+                System.out.println("\nEssa alternativa não existe. Digite uma opção válida.");
+                entrada.nextLine();
+                continue;
             }
 
-            if(a == 6) { // A partir da execução dessa estrutura, no momento em que o usuário digitar "6", o programa irá parar.
+            int opcao = entrada.nextInt();
+            entrada.nextLine();
+
+            if (opcao < 1 || opcao > 6) {
+                System.out.println("\nEssa alternativa não existe.");
+                continue;
+            }
+
+            if (opcao == 6) {
                 System.exit(0);
             }
 
-            if(a == 1) { // Chama a classe listar.
-                listar();
+            if (opcao == 1) {
+                if (quantidadeLivros == 0) {
+                    System.out.println("A biblioteca está vazia.");
+                } else {
+                    System.out.println("Livros disponíveis:");
+                    for (int i = 0; i < quantidadeLivros; i++) {
+                        System.out.println("- " + biblioteca[i]);
+                    }
+                }
             }
 
-            if(a == 2){ // Chama a classe adicionar.
-                adicionar();
+            if (opcao == 2) {
+                if (quantidadeLivros >= biblioteca.length) {
+                    System.out.println("A biblioteca está cheia.");
+                } else {
+                    System.out.print("Digite o nome do livro: ");
+                    biblioteca[quantidadeLivros++] = entrada.nextLine();
+                    System.out.println("O livro foi adicionado.\n");
+                }
             }
 
-            if(a == 3){ // Chama a classe buscar.
-                buscar();
+            if (opcao == 3) {
+                System.out.print("Digite o nome do livro: ");
+                String livro = entrada.nextLine();
+                boolean encontrado = false;
+
+                for (int i = 0; i < quantidadeLivros; i++) {
+                    if (biblioteca[i].equalsIgnoreCase(livro)) {
+                        System.out.println(livro + " faz parte da biblioteca.");
+                        encontrado = true;
+                        break;
+                    }
+                }
+                if (!encontrado) {
+                    System.out.println(livro + " não faz parte da biblioteca.");
+                }
             }
 
-            if(a == 4){ // Chama a classe remover.
-                remover();
+            if (opcao == 4) {
+                if (quantidadeLivros == 0) {
+                    System.out.println("A biblioteca está vazia.");
+                } else {
+                    System.out.println("Livros disponíveis:");
+                    for (int i = 0; i < quantidadeLivros; i++) {
+                        System.out.println((i + 1) + ". " + biblioteca[i]);
+                    }
+
+                    System.out.print("Digite o número do livro que deseja remover: ");
+                    if (entrada.hasNextInt()) {
+                        int indice = entrada.nextInt() - 1;//-1 para se alinhar com o indice númerico dos arrays
+                        entrada.nextLine();
+                        if (indice >= 0 && indice < quantidadeLivros) {
+                            for (int j = indice; j < quantidadeLivros - 1; j++) {// -1 serve para que a variavel indice esteja de acordo como
+                            biblioteca[j] = biblioteca[j + 1];                   // indice de posição das arrays
+                            }
+                            biblioteca[--quantidadeLivros] = null;
+                            System.out.println("O livro foi removido.");
+                        } else {
+                            System.out.println("Número inválido.");
+                        }
+                    } else {
+                        System.out.println("Entrada inválida.");
+                        entrada.nextLine();
+                    }
+                }
             }
 
-            if(a == 5){ // Chama a classe atualizar.
-                atualizar();
+            if (opcao == 5) {
+                if (quantidadeLivros == 0) {
+                    System.out.println("A biblioteca está vazia.");
+                } else {
+                    System.out.println("Livros disponíveis:");
+                    for (int i = 0; i < quantidadeLivros; i++) {
+                        System.out.println((i + 1) + ". " + biblioteca[i]);
+                    }
+
+                    System.out.print("Digite o número do livro que deseja atualizar: ");
+                    if (entrada.hasNextInt()) {
+                        int indice = entrada.nextInt() - 1; // -1 serve para que a variavel indice esteja de acordo como
+                                                            // indice de posição das arrays igual na opção de remover
+                        entrada.nextLine();
+                        if (indice >= 0 && indice < quantidadeLivros) {
+                            System.out.print("Digite o novo nome do livro: ");
+                            biblioteca[indice] = entrada.nextLine();
+                            System.out.println("Livro atualizado.");
+                        } else {
+                            System.out.println("Número inválido.");
+                        }
+                    } else {
+                        System.out.println("Entrada inválida.");
+                        entrada.nextLine();
+                    }
+                }
             }
         }
-        entrada.close();
-    }
-
-    public static void Voltar () { // Essa classe serve para dar continuidade ao programa, fazendo com que em uma só execução seja possível realizar todas as funcionalidades.
-       while(true){
-        Scanner entrada = new Scanner (System.in);
-        System.out.println("\nDeseja voltar para o Menu e acessar outra funcionalidade? Sim/Não");
-        String resposta = entrada.nextLine();
-
-        if(resposta.equals("Sim") || resposta.equals("sim")){ // equals.(parâmetro) significa basicamente o '==', porém como se trata de igualdade em strings se utiliza esse termo.
-            Menu();
-            break;
-        }
-        if(resposta.equals("Não") || resposta.equals("não") || resposta.equals("Nao") || resposta.equals("nao")){
-            System.exit(0);
-        }
-        
-    }
-        
-    }
-
-    public static void listar(){ // A classe listar imprime todos os livros encontrados dentro da lista.
-        if (biblioteca.isEmpty()) {
-            System.out.println("A biblioteca está vazia."); // Caso a lista esteja vazia, utilizando o termo 'biblioteca.isEmpty', uma mensagem é imprimida.
-        } else {
-            System.out.println("Livros disponíveis:");
-            for (String livro : biblioteca) {
-                System.out.println("- " + livro);
-            }
-        }
-        Voltar();
-    }
-
-    public static void adicionar(){ // A classe adicionar tem como finalizar criar um input para o nome do livro e adicioná-lo, através do 'add', à String Biblioteca.
-        Scanner entrada = new Scanner(System.in);
-        System.out.print("Digite o nome do livro:");
-        String livro = entrada.nextLine();
-        biblioteca.add(livro);
-        System.out.println("O livro foi adicionado.\n");
-        Voltar();
-    }
-
-    public static void buscar(){ // A classe buscar tem como objetivo pedir o nome do livro e, através do termo 'contains' saber se esse livro está contido ou não dentro da lista. Dependendo da resposta uma mensagem diferente vai ser imprimida.
-        Scanner entrada = new Scanner(System.in);
-        System.out.print("Digite o nome do livro:");
-        String livro = entrada.nextLine();
-
-        if (biblioteca.contains(livro)){
-            System.out.println(livro+" faz parte da biblioteca.");
-        }else{
-            System.out.println(livro+" não faz parte da biblioteca.");
-        }
-        Voltar();
-    }
-
-    public static void atualizar(){ // Essa classa se refere a atualização do nome de um livro que já pertencia a biblioteca. Através da criação de novas variáveis como 'livroAntigo' e 'livroNovo', além do termo 'set'.
-        Scanner entrada = new Scanner (System.in);
-        System.out.print("Digite o nome do livro: ");
-        String livroAntigo = entrada.nextLine();
-
-        if (biblioteca.contains(livroAntigo)) {
-            System.out.print("Digite o novo nome do livro: ");
-            String livroNovo = entrada.nextLine();
-            biblioteca.set(biblioteca.indexOf(livroAntigo), livroNovo);
-            System.out.println("Livro atualizado.");
-        } else {
-            System.out.println("O livro não está na biblioteca.");
-        }
-        Voltar();
-    }
-
-    public static void remover () { // Essa é a classe onde os livros são removidas pela ação 'biblioteca.remove(livro)', caso estejam dentro da biblioteca.
-        Scanner entrada = new Scanner (System.in);
-        System.out.println("Digite o nome do livro:");
-        String livro = entrada.nextLine();
-
-        if(biblioteca.remove(livro)) {
-            System.out.print("O livro foi removido.");
-        }else{
-            System.out.println("O livro não está na biblioteca.");
-        } 
-        Voltar();
-    }
-    
-
-    public static void main(String[] args) { // Tal classe dará início a execução do programa, chamando as classes anteriores e colocando-as em prática.
-        Menu();
     }
 }
