@@ -27,7 +27,7 @@ public class Biblioteca { // 'Classe Biblioteca' é a classe principal que vai d
 
             if (a < 1 || a > 6) { // Caso o usuário digite um núemro menor do que 1 (negativo) ou maior do que 6, o código imprima uma mensagem.
                 System.out.println("Essa alternativa não existe.");
-                
+                Menu();
             }
 
             if(a == 6) { // A partir da execução dessa estrutura, no momento em que o usuário digitar "6", o programa irá parar.
